@@ -1,38 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SearchComponent from '../components/SearchComponent.jsx';
-import ArchiveItem from '../components/ArchiveItem.astro';
-
-// Declare a state to hold search results in Astro
-let searchResults = [
-  {
-    title: 'ארכיון 1',
-    description: 'תיאור עבור פריט ארכיון 1',
-    date: '1850-01-01',
-    location: { lat: 31.7683, lng: 35.2137 },
-  },
-  {
-    title: 'ארכיון 2',
-    description: 'תיאור עבור פריט ארכיון 2',
-    date: '1900-05-10',
-    location: { lat: 32.0853, lng: 34.7818 },
-  },
-];
-
-// Function to update the results from the React search component
-const handleSearchResults = (results) => {
-  searchResults = results;
-};
 ---
-
-<Layout title="Archival Collection">
-  <!-- Render the React SearchComponent and pass down the handleSearchResults function -->
-  <SearchComponent client:load onSearchResults={handleSearchResults} />
-
-  <!-- Render the search results from the React component -->
-  <section>
-    {searchResults.map(item => (
-      <ArchiveItem {...item} />
-    ))}
-  </section>
-</Layout>
+<html lang="en">
+<head>
+  <title>My Homepage</title>
+</head>
+<body>
+<h1>Welcome to my website!</h1>
+</body>
+</html>

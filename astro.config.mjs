@@ -1,13 +1,10 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
-
-
-import react from '@astrojs/react';
-
-
-
-// https://astro.build/config
 export default defineConfig({
-  integrations: [react()]
+  build: {
+    async getStaticPaths() {
+      const items = await fetch('/items.json').then(res => res.json());
+      return items.rows.map(item => ({ params: { uuid: item.THING_UUID }}));
+    }
+  }
 });

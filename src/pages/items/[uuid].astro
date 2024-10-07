@@ -1,0 +1,37 @@
+---
+export async function getStaticPaths() {
+    // Fetch the JSON data using the correct path
+    const response = await fetch('/items.json'); // Correct path to the public folder
+    const items = await response.json();
+
+    // Generate paths based on your items' UUIDs
+    const paths = items.rows.map((item: { THING_UUID: string }) => ({
+        params: { uuid: item.THING_UUID },
+    }));
+
+    return paths; // Return the paths array
+}
+
+// Find the specific item based on the UUID
+const { uuid } = Astro.params;
+const itemsResponse = await fetch('/items.json'); // Correct path to the public folder
+const items = await itemsResponse.json();
+const item = items.rows.find((i: { THING_UUID: string }) => i.THING_UUID === uuid);
+---
+
+<article>
+    {item ? (
+            <>
+                <h1>{item['title from colenda']}</h1>
+                <p><strong>Description:</strong> {item.OBJECTS_DESCRIPTION}</p>
+                <h3>IIIF Manifests:</h3>
+                {item.manifesturl.split(' | ').map((manifestUrl: string) => (
+                        <div>
+                            <a href={manifestUrl} target="_blank">View Manifest</a>
+                        </div>
+                ))}
+            </>
+    ) : (
+            <p>Item not found.</p>
+    )}
+</article>

@@ -1,26 +1,15 @@
 ---
-export const props = {
-  title: '',
-};
+interface SampleLayoutProps {
+  title: string;
+  children: unknown; // You can specify a more precise type based on your use case
+}
+
+const { title, children } = Astro.props as SampleLayoutProps; // Cast props to your interface
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{props.title}</title>
-    <link rel="stylesheet" href="/styles.css">
-  </head>
-  <body>
-    <header>
-      <h1>{props.title}</h1>
-    </header>
-    <main>
-      {props.children}
-    </main>
-    <footer>
-      <p>&copy; 2024 Archive Collection</p>
-    </footer>
-  </body>
-</html>
+<header>
+  <h1>{title}</h1>
+</header>
+<main>
+  {children} <!-- Render the children passed to the layout -->
+</main>
